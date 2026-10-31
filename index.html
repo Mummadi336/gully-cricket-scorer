@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gully Cricket Scorer - fast, polished scorekeeping for neighborhood cricket matches."
+    />
+    <title>Gully Cricket Scorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">🏏</div>
+          <div>
+            <p class="eyebrow">Street Cricket Companion</p>
+            <h1>Gully Cricket Scorer</h1>
+          </div>
+        </div>
+        <button id="resetMatchBtn" class="ghost-btn" type="button">Reset Match</button>
+      </header>
+
+      <main class="main-grid">
+        <section id="setupCard" class="card setup-card">
+          <div class="card-head">
+            <div>
+              <p class="section-kicker">Set Up Match</p>
+              <h2>Start your game</h2>
+            </div>
+          </div>
+
+          <form id="matchForm" class="setup-form">
+            <div class="field-grid">
+              <label>
+                <span>Team A</span>
+                <input id="teamAName" type="text" maxlength="28" placeholder="Enter Team A name" />
+              </label>
+
+              <label>
+                <span>Team B</span>
+                <input id="teamBName" type="text" maxlength="28" placeholder="Enter Team B name" />
+              </label>
+
+              <label>
+                <span>Overs</span>
+                <input id="oversInput" type="number" min="1" max="20" value="8" />
+              </label>
+
+              <label>
+                <span>Batting First</span>
+                <select id="battingFirstSelect">
+                  <option value="teamA">Team A</option>
+                  <option value="teamB">Team B</option>
+                </select>
+              </label>
+
+              <label class="full-span">
+                <span>Players: Team A</span>
+                <textarea
+                  id="teamAPlayers"
+                  rows="5"
+                  placeholder="Add one player on each line or separate by commas"
+                ></textarea>
+              </label>
+
+              <label class="full-span">
+                <span>Players: Team B</span>
+                <textarea
+                  id="teamBPlayers"
+                  rows="5"
+                  placeholder="Add one player on each line or separate by commas"
+                ></textarea>
+              </label>
+            </div>
+
+            <button class="primary-btn" type="submit">Start Match</button>
+          </form>
+        </section>
+
+        <section id="scoreboardCard" class="card scoreboard-card hidden">
+          <div class="score-header">
+            <div>
+              <p id="inningsLabel" class="section-kicker">Innings 1</p>
+              <h2 id="matchTitle">Match</h2>
+            </div>
+            <div class="status-badge" id="statusBadge">Ready</div>
+          </div>
+
+          <div class="score-summary">
+            <div class="main-score">
+              <span class="label">Score</span>
+              <strong id="scoreText">0/0</strong>
+            </div>
+            <div class="main-score">
+              <span class="label">Overs</span>
+              <strong id="oversText">0.0</strong>
+            </div>
+            <div class="main-score target-box">
+              <span class="label">Target</span>
+              <strong id="targetText">—</strong>
+            </div>
+          </div>
+
+          <div class="run-rate-box">
+            <div>
+              <span>Run Rate</span>
+              <strong id="runRateText">0.00</strong>
+            </div>
+            <div>
+              <span>Req. Rate</span>
+              <strong id="requiredRateText">0.00</strong>
+            </div>
+          </div>
+
+          <div class="batting-strip">
+            <span id="battingTeamName">Team</span>
+            <span class="vs-text">vs</span>
+            <span id="bowlingTeamName">Team</span>
+          </div>
+
+          <div class="players-panel">
+            <div class="batsman-card">
+              <div class="batsman-topline">
+                <span>Striker</span>
+                <strong id="strikerName">—</strong>
+              </div>
+              <div class="batsman-metrics">
+                <div><span>Runs</span><strong id="strikerRuns">0</strong></div>
+                <div><span>Balls</span><strong id="strikerBalls">0</strong></div>
+              </div>
+            </div>
+
+            <div class="batsman-card">
+              <div class="batsman-topline">
+                <span>Non-striker</span>
+                <strong id="nonStrikerName">—</strong>
+              </div>
+              <div class="batsman-metrics">
+                <div><span>Runs</span><strong id="nonStrikerRuns">0</strong></div>
+                <div><span>Balls</span><strong id="nonStrikerBalls">0</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="controlsCard" class="card controls-card hidden">
+          <div class="card-head compact">
+            <div>
+              <p class="section-kicker">Scoring</p>
+              <h2>Quick Actions</h2>
+            </div>
+          </div>
+
+          <div class="button-grid">
+            <button class="score-btn" data-runs="0" type="button">0</button>
+            <button class="score-btn" data-runs="1" type="button">1</button>
+            <button class="score-btn" data-runs="2" type="button">2</button>
+            <button class="score-btn" data-runs="3" type="button">3</button>
+            <button class="score-btn" data-runs="4" type="button">4</button>
+            <button class="score-btn" data-runs="6" type="button">6</button>
+            <button class="special-btn" data-type="wide" type="button">Wide</button>
+            <button class="special-btn" data-type="no-ball" type="button">No Ball</button>
+            <button class="special-btn" data-type="wicket" type="button">Wicket</button>
+          </div>
+
+          <div class="utility-row">
+            <button id="undoBtn" class="ghost-btn" type="button">Undo</button>
+            <button id="switchInningsBtn" class="primary-btn" type="button">Swap Innings</button>
+          </div>
+        </section>
+
+        <section id="recentBallCard" class="card recent-card hidden">
+          <div class="card-head compact">
+            <div>
+              <p class="section-kicker">Live Feed</p>
+              <h2>Recent Balls</h2>
+            </div>
+          </div>
+          <ul id="recentBallsList" class="ball-list"></ul>
+        </section>
+
+        <section id="summaryCard" class="card summary-card hidden">
+          <div class="card-head compact">
+            <div>
+              <p class="section-kicker">Match View</p>
+              <h2>Summary</h2>
+            </div>
+          </div>
+          <div id="summaryContent" class="summary-content"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
